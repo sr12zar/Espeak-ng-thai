@@ -81,16 +81,16 @@ To go into ../espeak-ng-data/lang/
     ../th
 
 To go into ../dictsource/
-    th_rules
-    th_list
-    th_extra
+    - th_rules
+    - th_list
+    - th_extra
 
 To go into ../phsource/
     ph_thai
 
 and append to ../phsource/phonemes file
-    phonemetable th base1
-	include ph_thai
+   { phonemetable th base1
+	include ph_thai }
 
 These files and changes must be applied to espeak-ng source before the usual build process (eg. ./configure, make, make test, ...). If there are any errors in the build process, do a 'make clean', amend the errors and restart the build process again.
 
