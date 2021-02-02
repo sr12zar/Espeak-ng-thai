@@ -12,9 +12,9 @@ Espeak-ng-thai follows a simple approach with a grapheme-to-phoneme (G2P) step, 
 The G2P step still remains a challenge in Thai tts due to lack of word delimiters in Thai writing and many adopted conventions and words from other languages. Many strategies and methods have been developed and reported. All G2P conversions achieved high levels of success but refinements are still needed. This G2P (Espeak-ng-thai) is based on pattern matching of utterance and rule-based conversion of a common and logical sound unit (that Thais are taught to read at school for examples ก -ะ, ก -า,  ก -า ง  ้, ส เ-ือ  ้, and so on).
 
 Note.
-A sound unit is symbolized as {<head char>[<vowel>][<end char>][<intonation>]} where
-<head char> denotes leading consonant; <end char> tail consonant;...
-Terms in [] may not be present or omitted; components of <vowel> may be placed before, over, under, or after <head char>, or omitted in writing; <intonation> depends on tone of <head char> (high, middle or low), short or long vowel, and type of <end char> (dead or live). So <intonation> can be different from actual (Thai intonation) mark used.
+A sound unit is symbolized as {head char[vowel][end char][intonation]} where
+head char denotes leading consonant; end char tail consonant;...
+Terms in [] may not be present or omitted; components of vowel may be placed before, over, under, or after head char, or omitted in writing; intonation depends on tone of head char (high, middle or low), short or long vowel, and type of end char (dead or live). So <intonation> can be different from actual (Thai intonation) mark used.
 
 In this Espeak-ng-thai package, strings of Thai graphemes (text) are segmented into basic units (called syllables or utterances) using a word-dictionary-based program such as 'swath' or '(libthai) thbrk'. An utterable dictionary is built to be used with these programs to segment  Thai text into syllables rather than words.
 
