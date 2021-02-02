@@ -1,0 +1,101 @@
+//=======================================================
+//  th_rules : Thai rules proposed by Sunthorn Rathmanus
+//=================version 0.0.1 (20180417)==============
+// 20180724 append a list: thaichar to ipa code
+// Some Thai language rules for translating 'formated' Thai text to ipa
+// 
+//*** Having problem getting -(place holder) in vowels processed correctly by espeak-ng
+//*** Rules below are defined to stop error messages but ===not used===.
+  
+// Vowels
+// =======
+// 18 simple vowels (V)
+//  a a: i i: v v: u u: e e: E   E: o  o:  O   O:  @   @:   aj   am a:j aw a:w
+// -ะ -า -ิ -ี  -ึ  -ื -ุ -ู เ-ะ เ- แ-ะ แ- โ-ะ โ- เ-าะ -อ เ-อะ เ-อ ไ- -ัย -ำ -าย เ-า -าว
+
+//Diphthongs
+//===========
+// 6 compound vowels
+// ia  i:a  va  v:a ua u:a
+// เ-ียะ เ-ีย เ-ือะ เ-ือ -ัวะ -ัว
+
+.A อะ อา อิ อี อึ อื อุ อู เอะ เอ แอะ แอ โอะ โอ เอาะ ออ เออะ เออ ไอ อัย อำ อาย เอา อาว เอียะ เอีย เอือะ เอือ อัวะ อัว
+
+// Consonants
+//===========
+// 21 single head chars 
+// p t c  k z ph th ch b d m n ng l r  f s h w j
+// ป ต จ ก อ  พ ท  ช บ ด ม น ง  ล ร ฟ ส ฮ ว ย
+.B ป ต จ ก อ พ ท ช บ ด ม น ง ล ร ฟ ส ฮ ว ย
+// 8 end chars ก ง น ด บ ว ย 
+.Y ก ง น ด บ ว ย 
+// 11 อักษรสูง :	ข ฃ ฉ ฐ ถ ผ ฝ ศ ษ ส ห	- sound + (4) with long vowels, 1 with short vowels
+.H ข ฃ ฉ ฐ ถ ผ ฝ ศ ษ ส ห
+// 9 อักษรกลาง :	ก จ ฎ ฏ ด ต บ ป อ	 - sound as expected
+.G ก จ ฎ ฏ ด ต บ ป อ 
+// 24 อักษรต่ำ :	ค ฅ ฆ ง ช ซ ฌ ญ ฑ ฒ ณ ท ธ น พ ฟ ภ ม ย ร ล ว ฬ ฮ - 20 w long vowels, 4 with short
+.F ค ฅ ฆ ง ช ซ ฌ ญ ฑ ฒ ณ ท ธ น พ ฟ ภ ม ย ร ล ว ฬ ฮ
+
+.C ก จ ฎ ฏ ด ต บ ป อ ข ฃ ฉ ฐ ถ ผ ฝ ศ ษ ส ห ค ฅ ฆ ง ช ซ ฌ ญ ฑ ฒ ณ ท ธ น พ ฟ ภ ม ย ร ล ว ฬ ฮ
+// 18 compound heads
+// pr phr tr kr khr pl phl thr kl khl kw khw   br bl fr fl dr
+// ปร  พร  ตร  กร  คร  ปล พล   ทร  กล  คล  กว  คว ขว   บร บล ฟร ฟล ดร
+
+// Use default for English for now
+// Issues ก ค;  พ ป;  ท ต; and 'tonal consonants+vowel length' to be resolved
+
+// Numbers
+.D 0 1 2 3 4 5 6 7 8 9 ๐ ๑ ๒ ๓ ๔ ๕ ๖ ๗ ๘ ๙ 
+// yamaka
+// abbreviations
+// common clauses
+// English?
+//.Z - ^ //??
+// Thai text input due to its complexity is preprocessed and 
+//   converted into 'standard format' (head + vowel + [tone] + [end])
+
+.L01 ข ฃ ฉ ฐ ถ ผ ฝ ศ ษ ส ห // 11 high tone head chars
+.L02 ก จ ฎ ฏ ด ต บ ป อ // 9 level tone head chars
+.L03 ค ฅ ฆ ง ช ซ ฌ ญ ฑ ฒ ณ ท ธ น พ ฟ ภ ม ย ร ล ว ฬ ฮ	// 24 low tone head chars
+.L04 อะ อิ อึ อุ เอะ แอะ โอะ เอาะ เออะ // 9 short vowels
+.L05 อา อี อื อู เอ แอ โอ ออ เออ ไอ อำ อาย เอา อาว // long vowels
+.L06 ^ก ^บ ^ด // dead end   limit range of tone
+.L07 ^ง ^น ^ย ^ว ^อ // live end   no limit
+//.L08 ข ฃ ฉ ฐ ถ ผ ฝ ศ ษ ส ก จ ฎ ฏ ด ต บ ป ค ฅ ฆ ฑ ฒ ท ธ พ ฟ ภ ฮ    dead end
+//.L09 ญ ณ น ม ย ร ล ว ฬ อ	   live end
+//.L10 ปร พร ตร กร คร ปล พล ทร กล คล กว คว ขว บร บล ฟร ฟล ดร	   clusters
+
+// Tone marks  	0 ; _่	1 ; _้	2 ; _๊	3 ; _๋	4  
+.group 0
+	0 _ 0
+	L01) L04) 0 _ 1		   high char + short vowel, utter tone is falling
+	L01) L05) 0 _ 4		   high char + long vowel, utter tone is high
+	L02) 0 _ 0			   level 
+	L03) L04) 0 _ 4		   low char + short vowel, utter tone high
+	L03) L05) 0 _ 1		   low char + long vowel, utter is falling
+
+.group 1
+	1 _ 1
+	L01) L04) 1 _ 2		   high char + short vowel, utter tone is falling
+	L01) L05) 1 _ 1		   high char + long vowel, utter tone is high
+	L02) 1 _ 1
+	L03) L04) 1 _ 2		   low char + short vowel, utter tone high
+	L03) L05) 1 _ 1		   low char + long vowel, utter is falling
+
+.group 2
+	2 _ 2
+	L01) L04) 2 _ 3		   high char + short vowel, utter tone is falling
+	L01) L05) 2 _ 3		   high char + long vowel, utter tone is high
+	L02) 2 _ 2
+	L03) L04) 2 _ 4		   low char + short vowel, utter tone high
+	L03) L05) 2 _ 1		   low char + long vowel, utter is falling
+
+.group 3
+	3 _ 3
+	L02) 3 _ 3
+	L03) L04) 3 _ 4		   low char + short vowel, utter tone high
+	L03) L05) 3 _ 2		   low char + long vowel, utter is falling
+.group 4
+	4 _ 4
+// More to do but for now
+// *** See ../phsource/ph_thai and its appendage for more details 
