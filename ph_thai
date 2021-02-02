@@ -1,0 +1,661 @@
+//========================================================
+//  ph_thai : Thai Phonemes proposed by Sunthorn Rathmanus
+//=================version 0.0.1 (20180417)===============
+// 20180724 append a list: thaichar to ipa code
+
+// additional types for Thai -ึ แ- +(a e i o u @)
+phoneme #v  virtual	
+endphoneme
+phoneme #x  virtual
+endphoneme
+
+// Tones
+//======
+phoneme 0   //  nominal : level
+  ipa ˧
+  stress
+  Tone(20, 24, envelope/p_level, NULL) //20,25 p_level ?i_risefall2
+endphoneme
+
+phoneme 1   //  mai ek : low falling
+  ipa ˩
+  stress
+  Tone(22, 5, envelope/p_fall, NULL) // 20, 5
+endphoneme
+
+phoneme 2   //  mai to : risefall 
+  ipa ˥˩
+  stress
+  Tone(30, 55, envelope/p_451, NULL) // 25, 50 ./p_451
+endphoneme
+
+phoneme 3   //  mai trii : sharp short rising
+  ipa ˧˥
+  stress
+  Tone(45, 65, envelope/p_rise, NULL) //35,65 /p_rise
+endphoneme
+
+phoneme 4   //  mai cattawa: curve long rising ??
+  ipa ˩˩˦
+  stress
+  Tone(25, 85, envelope/p_rise, NULL) //35,85 p_214 ./p_rise constricted? 
+endphoneme
+
+
+// Vowels
+//=======
+// 18 simple vowels
+// a  a:  i  i:  v  v:  u  u: e  e:  E  E:  o  o:  O  O:  @   @:   aj  am  a:j  aw a:w
+//อะ  อา   อิ    อี   อึ    อื    อุ    อู  เอะ  เอ  แอะ แอ  โอะ โอ เอาะ ออ  เออะ เออ   ไ/อัย  อำ  อาย   เอา  อาว
+
+phoneme a	// -ะ ; aa,a: -า
+  ipa a
+  vwl 
+  //starttype #a endtype #a
+  length 170
+  FMT(vowel/a_4)  //a_2/a_6)
+endphoneme
+phoneme aa	// a: lengthens a; a- shortens a
+  ipa a:
+  vwl 
+  starttype #a endtype #a
+  length 340
+  FMT(vowel/a_4)
+endphoneme
+phoneme a-	// shorter -ะ for compound consonants กร k,@r' กล k,@l' กว k,@w'...
+  ipa a-
+  vwl
+  starttype #a  endtype #a
+  length 100
+  FMT(vowel/a_2)   //vowel/@_2)
+endphoneme
+
+phoneme i	// -ิ ; ii, i: -ี
+  ipa i
+  vwl  
+  starttype #i  endtype #i
+  length 150
+  FMT(vowel/i_2)
+endphoneme
+phoneme ii	// -ี; ii, i:
+  ipa i:
+  vwl  
+  starttype #i  endtype #i
+  length 340
+  FMT(vowel/i_2)
+endphoneme
+
+phoneme e	// เ-ะ
+  ipa e
+  vwl 
+  starttype #e endtype #e
+  length 170
+  FMT(vowel/e)
+endphoneme
+phoneme ee	// เ-
+  ipa e:
+  vwl 
+  starttype #e endtype #e
+  length 340
+  FMT(vowel/e)
+endphoneme
+
+phoneme x	// แ-ะ, E in Kersh.
+  ipa ɛ
+  vwl 
+  //starttype #e endtype #e
+  length 170
+  FMT(vowel/ee_4)   //ee_2)
+endphoneme
+phoneme xx	// แ-, E:
+  ipa ɛ:
+  vwl 
+  //starttype #e endtype #e
+  length 340
+  FMT(vowel/ee_4)   //ee_2)
+endphoneme
+
+phoneme o	// โ-ะ 
+  ipa o
+  vwl 
+  starttype #o endtype #o
+  length 170
+  FMT(vowel/o)  // o_2)
+endphoneme
+phoneme oo	// โ- ; oo, o:
+  ipa o:
+  vwl 
+  //starttype #o endtype #o
+  length 340
+  FMT(vowel/o)  // o_2)
+endphoneme
+
+phoneme @	// เ-าะ, -อะ ; O Kersh. -็? O- ; -อ OO O:,  ɔ=(umd bck unr)
+  ipa ɔ
+  vwl
+  starttype #o endtype #o
+  length 170
+  FMT(vowel/0) //oo)
+endphoneme
+phoneme @@	// -อ oo o:,  ɔ=(umd bck unr)
+  ipa ɔ:
+  vwl 
+  starttype #o endtype #o
+  length 340
+  FMT(vowel/0) //oo) 
+endphoneme
+
+phoneme q	// เ-อะ ; q in th_phoneme??
+  ipa ɤ
+  vwl
+  starttype #@ endtype #@
+  length 170
+  FMT(vowel/8_3)  // @_2)
+endphoneme
+phoneme qq	// เ-อ ; 
+  ipa ɤ:
+  vwl
+  starttype #@ endtype #@
+  length 340
+  FMT(vowel/8_3) 
+endphoneme
+
+phoneme u	// -ุ  (hgh bck unr)
+  ipa u
+  vwl
+  starttype #u endtype #u
+  length 170
+  FMT(vowel/u_bck,70) 
+endphoneme
+phoneme uu	// -ุ  (hgh bck unr)
+  ipa u:
+  vwl
+  starttype #u endtype #u
+  length 340
+  FMT(vowel/u_bck,70) 
+endphoneme
+
+phoneme v	// -ึ (hgh,bck,rnd); u- Kers.
+  ipa ɯ
+  vwl
+  starttype #u endtype #u
+  length 170
+  FMT(vowel/uu#_2,70) // u#_5 ??
+endphoneme
+phoneme vv	// -ื (hgh,bck,rnd); u-: Kers.
+  ipa ɯ:
+  vwl
+  starttype #u endtype #u
+  length 340
+  FMT(vowel/uu#_2,70) // uu_3 u_fnt
+endphoneme
+
+// Diphthongs
+//===========
+// 6 compound vowels
+//  ia  i:a  va   v:a  ua  u:a
+//  เ-ียะ เ-ีย    เ-ือะ   เ-ือ   -ัวะ  -ัว
+
+phoneme ia	// เ-ียะ
+  ipa ia
+  vwl
+  starttype #i endtype #a
+  length 170 
+  FMT(vdiph/i@_2) // look up vdiph
+endphoneme
+phoneme iia	// เ-ีย
+  ipa i:a
+  vwl
+  starttype #i endtype #a
+  length 340 
+  FMT(vdiph/i@_2)	// look up vdiph 
+endphoneme
+
+phoneme va	// เ-ือะ
+  ipa ɯa
+  vwl
+  starttype #u endtype #@
+  length 170 
+  FMT(vdiph2/y-y#) // look up vdiph2
+endphoneme
+phoneme vva	// เ-ือ ; v:a
+  ipa ɯ:a
+  vwl
+  starttype #v endtype #@
+  length 340 
+  FMT(vdiph2/y-y#) // uu@) // look up vdiph2
+endphoneme
+
+phoneme ua	// -ัวะ
+  ipa ua
+  vwl
+  starttype #u endtype #a
+  length 170 
+  FMT(vdiph2/u@) // look up vdiph2
+endphoneme
+phoneme uua	// -ัว
+  ipa u:a
+  vwl
+  starttype #u endtype #a
+  length 340 
+  FMT(vdiph2/uu@) // look up vdiph2
+endphoneme
+
+phoneme aw	// เ-า
+  ipa aw
+  vwl
+  starttype #a endtype #u
+  length 170 
+  FMT(vdiph/aau_2)	
+endphoneme
+
+phoneme aaw	// -าว
+  ipa a:w
+  vwl
+  starttype #a endtype #u
+  length 340	// max 511
+  FMT(vdiph/aau_3) 
+endphoneme
+
+// Addition Dipthongs
+//===================
+  
+//phoneme am	// -ำ
+//  ipa am
+//  vwl
+  //starttype #a endtype #?
+//  length 280
+//  FMT(vowel/a)
+//endphoneme
+
+phoneme aj	// ไ-(ย), ใ, -ัย
+  ipa aj
+  vwl
+  starttype #a endtype #i
+  length 340
+  FMT(vdiph/ai_2)	// look up vdiph
+endphoneme
+phoneme aaj	// -าย
+  ipa a:j
+  vwl
+  starttype #a endtype #i
+  length 340
+  FMT(vdiph/aai_2)	// look up vdiph
+endphoneme
+
+phoneme ew	// เ-ว
+  vwl
+  starttype #e endtype #u
+  length 340
+  FMT(vdiph/eu)
+endphoneme
+
+phoneme qj	// เ-ย
+  vwl
+  starttype #@ endtype #i
+  length 340
+  FMT(vdiph/@i_2) // look up vdiph
+endphoneme
+
+phoneme xxw	// แ-ว
+  vwl
+  starttype #x endtype #u
+  length 340
+  FMT(vdiph/eeu) // eeu_3) 
+endphoneme
+
+phoneme iw	// -ิว
+  vwl
+  starttype #i endtype #u
+  length 340
+  FMT(vdiph2/iu_2)	// look up vdiph2
+endphoneme
+
+//phoneme iaw	// เ-ิยว 
+//phoneme uaj	// -วย 
+//phoneme vaj	// เ-ือย
+
+// ** Consonants
+// **Issues ก ค;  พ ป;  ท ต; and 'tonal consonants+vowel length' to be resolved
+ 
+phoneme k	// ก; g less nasal 'gk' sounds better
+  //import_phoneme base1/ k
+  //voicingswitch g
+  //ipa k
+  // copy from ph_base12 as template
+  vls vel stp
+  lengthmod 2
+  voicingswitch g
+  Vowelin f1=0  f2=2340 200 400  f3=-100 80
+  Vowelout f1=0 f2=2340 340 400  f3=-100 80  rms=20
+
+  IF nextPh(isPause2) THEN
+    WAV(ustop/k_)
+  //ELIF nextPh(isRhotic) THEN
+  //  WAV(ustop/kr)
+  //ELIF nextPh(#i) OR nextPh(;) THEN
+  //  WAV(ustop/ki)
+  ELIF nextPh(l) THEN
+    WAV(ustop/kl)
+  ENDIF
+  WAV(ustop/k_unasp, 70)
+endphoneme
+
+phoneme kh	// ข ฃ ค ฅ ฆ
+  import_phoneme base1/k
+  voicingswitch h
+  ipa kʰ
+endphoneme
+
+phoneme c	// จ; tS Kers. dZ?
+  //vcd pla afr sib
+  vcd pla afr sib
+  voicingswitch tS
+  lengthmod 5
+  Vowelin f1=2  f2=2300 200 400  f3=100 80
+  Vowelout f1=2  f2=2300 250 300  f3=100 80 brk
+//  import_phoneme base1/dZ
+//  voicingswitch tS
+  ipa tɕ
+endphoneme
+phoneme ch	// ฉ ช ฌ; tS Kers.
+  import_phoneme base1/Z
+  voicingswitch S
+  ipa tɕʰ	
+endphoneme
+
+phoneme p	// ป; 'bp' sounds better
+  import_phoneme base1/p
+  voicingswitch b 
+  ipa p
+endphoneme
+phoneme ph	// ผ พ ภ
+  import_phoneme base1/p
+  voicingswitch h
+  ipa pʰ 
+endphoneme
+
+//phoneme t	// ต ฏ
+  //vls alv stp
+//  import_phoneme base1/t
+//  ipa t
+//endphoneme
+phoneme th	// ท ธ ฒ ฐ ฑ
+  //vcd alv stp	
+  import_phoneme base1/t
+  ipa tʰ
+  voicingswitch h	
+endphoneme
+
+//phoneme b	// บ
+//  import_phoneme base1/b
+//  ipa b
+//endphoneme
+//phoneme d	// ด ฎ
+//  import_phoneme base1/d
+//  ipa d
+//endphoneme
+//phoneme ng	// ง
+//  import_phoneme base1/N
+//  ipa ŋ
+//endphoneme
+
+//phoneme m	// ม
+//  import_phoneme base1/m
+//  ipa m
+//endphoneme
+//phoneme n	// น ณ
+//  import_phoneme base1/n
+//  ipa n
+//endphoneme
+
+//phoneme l	// ล ฬ
+//  import_phoneme base1/l
+//  ipa l
+//endphoneme
+//phoneme w	// ว
+//  import_phoneme base1/w
+//  ipa w
+//endphoneme
+
+//phoneme r	// ร
+//  import_phoneme base1/r\\
+//  ipa r
+//endphoneme
+
+//phoneme s	// ส ศ ษ ซ
+//  import_phoneme base1/s
+//  ipa s
+//endphoneme
+
+//phoneme f	// ฝ ฟ 
+//  import_phoneme base1/f
+//  ipa f
+//endphoneme
+
+//phoneme h	// ห ฮ
+//  import_phoneme base1/h
+//  ipa h
+//endphoneme
+
+//phoneme j	// ย ญ
+//  import_phoneme base1/j
+//  ipa j
+//endphoneme
+ 
+//phoneme z	// อ; voiceless, glottal, stop?; as in Vaja
+  //vls glt stp
+  //import_phoneme base1/?	
+  //ipa ʔ
+  //lengthmod 3
+//endphoneme
+phoneme z  // glottal stp
+  vls glt stp
+  lengthmod 3   // ??
+  nolink
+  Vowelin  glstop
+  Vowelout glstop
+  WAV(ustop/null)
+endphoneme
+
+// special 
+//phoneme _ ๎	// yamakkaan; a- ; shortened a; used on leading char of cluster eg. gl, sl
+//  import_phoneme base1/ @
+//  ipa a-	// kr,kl,kw,...
+//  length 90
+//endphoneme	
+//phoneme -็	// taikuu; shorten preceding vowel 
+//  import_phoneme base1/ @
+//  length 100 
+//endphoneme
+
+// 18 compounds * now mapped with g2p-th2ipa.dat  
+// ปร  พร  ตร  กร  คร  ปล  พล   ทร   กล  คล   กว  คว/ขว       บร บล ฟร ฟล ดร
+// pr phr tr kr khr pl phl thr kl khl kw  khw      br bl fr fl dr
+// as they are for now **issues with ขว ทร สร
+//** end ph_thai
+//**************
+// 20180724 a list appended. 
+// The list below shows espeak-ng ipa code for Thai Characters (tab separated)
+//	 ๎	a-
+//	-อ	@@
+//	-ะ	a
+//	-ัย	aj
+//	-ัว	uua
+//	-ัวะ	ua
+//	-า	aa
+//	-าย	aaj
+//	-าว	aaw
+//	-ำ	am
+//	-ิ	i
+//	-ิว	iw
+//	-ี	ii
+//	-ึ	v
+//	-ื	vv
+//	-ุ	u
+//	-ู	uu
+//	ก	g
+//	ก.	g'@@0
+//	กร	ga-r
+//	กรณ	g@ra-n
+//	กล	ga-l
+//	กว	kw
+//	กษ	ga-s
+//	ข	kh
+//	ข.	kh'@@4
+//	ขบ	kha-b
+//	ขล	khl
+//	ฃ	kh
+//	ค	kh
+//	ค.	kh'@@1
+//	คด	kha-d
+//	คณ	kha-n
+//	คร	kh@-r
+//	คล	kha-l
+//	คว	khw
+//	ฅ	kh
+//	ฆ	kh
+//	ง	N
+//	ง.	N'@@0
+//	จ	dZ
+//	จ.	dZ'@@0
+//	จร	dZ,a-r
+//	ฉ	ch
+//	ฉ.	ch'@@4
+//	ฉง	ch,a-N
+//	ฉล	ch,a-l
+//	ช	tS
+//	ช.	tS'@@0
+//	ชร	tS,a-r
+//	ซ	s
+//	ซ.	s'@@1
+//	ฌ	ch
+//	ญ	j
+//	ญ.	j'@@0
+//	ฎ	d
+//	ฏ	t
+//	ฐ	th
+//	ฐ.	th'@@4
+//	ฑ	th
+//	ฒ	th
+//	ด	d
+//	ด.	d'@@0
+//	ดร	dr
+//	ต	t
+//	ต.	t'@@
+//	ตร	tr
+//	ตล	tal
+//	ถ	th
+//	ถ.	th'@@4
+//	ท	th
+//	ท.	th'@@0
+//	ทร	tha-r
+//	ธ	th
+//	ธ.	th'@@0
+//	น	n
+//	น.	n'@@0
+//	บ	b
+//	บ.	b'@@0
+//	บร	b@r
+//	บล	bl
+//	ป	p
+//	ป.	p'@@0
+//	ปร	pr
+//	ปล	pl
+//	ผ	ph
+//	ผ.	ph'@@4
+//	ผล	ph,a-l
+//	ฝ	f
+//	ฝ.	f'@@4
+//	พ	ph
+//	พ.	ph'@@0
+//	พร	ph,a-r
+//	พล	ph,a-l
+//	ฟ	f
+//	ฟ.	f'@@0
+//	ฟร	f,a-r
+//	ฟล	f,a-l
+//	ภ	ph
+//	ภ.	ph'@@0
+//	ม	m
+//	ม.	m'@@0
+//	ย	j
+//	ย.	j'@@0
+//	ยส	j,as
+//	ร	r
+//	ร.	r'@@0
+//	รห	r,a-h
+//	ฤ	rv
+//	ฤา	rvv
+//	ล	l
+//	ล.	l'@@0
+//	ฦ	lv
+//	ฦา	lvv
+//	ว	w
+//	ว.	w'@@0
+//	ศ	s
+//	ศ.	s'@@4
+//	ษ	s
+//	ษ.	s'@@4
+//	ส	s
+//	ส.	s'@@4
+//	สก	s,ag
+//	สกร	s,agr
+//	สคร	s,akr
+//	สง	s,aN
+//	สต	s,at
+//	สตร	s,atr
+//	สด	s,ad
+//	สถ	s,ath
+//	สบ	s,ab
+//	สป	s,aph
+//	สภ	s,aph
+//	สม s,am
+//	สว	s,aw
+//	สห	s,ah
+//	ห	h
+//	ห.	h'@@4
+//	หง	N
+//	หญ	j
+//	หน	n
+//	หม	m
+//	หย	j
+//	หร	r
+//	หว	w
+//	ฬ	l
+//	ฬ.	l'@@0
+//	อ	z
+//	อ.	'@@0
+//	อย	j
+//	อร	,ar
+//	ฮ	h
+//	ฮ.	h'@@0
+//	เ-	ee
+//	เ-ย	qj
+//	เ-ว	ew
+//	เ-อ	qq
+//	เ-อะ	q
+//	เ-ะ	e
+//	เ-า	aw
+//	เ-าะ	@
+//	เ-ีย	iia
+//	เ-ียะ	ia
+//	เ-ือ	vva
+//	เ-ือะ	va
+//	แ-	xx
+//	แ-ว	xxw
+//	แ-ะ	x
+//	โ-	oo
+//	โ-ะ	o
+//	ไ-	aj
+//** end list
+
+// *** So far this will not work with normal (unformated) Thai text
+// Preprocessing of normal to formated Thai text is needed
+// eg. สำเนียง   -> ส ำ  4^|น เ-ีย 0^ง|; ตล้าย  -> ตล -าย 3/
+// Then ipa code is used to compose thai ipa and input in [[...]] to espeak-ng
+// eg. ตล้าย  -> ตล -าย 3/ -> kha-laaj3
+// After compilation for Thai language eg. make th
+// Use below or similar to test (in appropriate directory say '~/espeak-ng')
+// ESPEAK_DATA_PATH=../ LD_LIBRARY_PATH=../src: ../src/espeak-ng -vth --stdout "[[kha-laaj3]]" | paplay
+// Contact s.rathmanus on gmail for further details
