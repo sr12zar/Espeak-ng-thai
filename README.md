@@ -37,8 +37,9 @@ A number of publicly available free and opensource software and data packages ar
 The syllable dictionary (in ./th-utterdict/) is a trie structure built with -libdatrie- using searchword data in the Royal Society (Thai-Thai) dictionary edition of 2542 BE.
 
 Much edition has been done using 'trietool' in libdatrie a dependency of libthai. Try in a terminal:
-{(pathto)/libdatrie/tools/tritool --help}.
-
+```
+(pathto)/libdatrie/tools/tritool --help
+```
 ### Segmentation
 
 Either 'swath' and (libthai) 'test-thwbrk' can be used to break Thai text into syllables. But their associated and defaulted word-based dictionary must be replaced by the utterable dictionary (supplied in subdirectory /utterdict in this package).
@@ -47,15 +48,15 @@ Both 'swath', 'libthai' (and a libthai dependency 'libdatrie') packages can be o
 
 If 'swath' is to be used to segment text into syllables, the syllable dictionary (supplied in ../utterdict) must be specified instead of its own ..data/swathdic.tri. eg.
 ```
-echo "สวัสดีค่ะ" | swath -u u,u -d (path-to)/th-utterdict/thbrk.tri }
+echo "สวัสดีค่ะ" | swath -u u,u -d (path-to)/th-utterdict/thbrk.tri
 would output
-{ สวัส|ดี|ค่ะ
+สวัส|ดี|ค่ะ
 ```
 If 'thwbrk' is used, then the program test_thwbrk.c (.../libthai.../tests/) is to be modified (as supplied, see its source code) and compiled with others using the usual Linux system 'make' (./configure, make, and 'make test') to build test_thwbrk for use in breaking Thai phrases into syllables. The syllable dictionary (supplied in ../th-utterdict/ ) is to be used in place of libthai/data/thbrk.tri by specifying LIBTHAI_DICTDIR eg.
 ```
-{ LIBTHAI_DICTDIR=(path-to)/th-utterdict (path-to-modified)/tests/test_thwbrk -i "สวัสดีครับ" }
+LIBTHAI_DICTDIR=(path-to)/th-utterdict (path-to-modified)/tests/test_thwbrk -i "สวัสดีครับ"
 would produce
-{ สวัส|ดี|ครับ }
+สวัส|ดี|ครับ
 ```
 *Note.* libthai needs just 'make' to compile but not 'make install' (to install for systemwide use. 'espeak-th' bash script runs it from the libthai source directory).
 
@@ -68,8 +69,8 @@ _At as Jan 2021, Thai language is added to espeak-ng master package. However, th
 ## Espeak-ng-thai Supplied Source:
 
 Please refer to espeak-ng's ../docs/add_languages.md before making these changes and Espeak-ng's README.md before building Espeak-ng with Thai language. You may like to install some dependency pakages eg. by issuing on a terminal
-{./autogen.sh
- ./configure }.
+- ./autogen.sh
+- ./configure 
 
 ### Modifying Espeak-ng
 
@@ -80,11 +81,12 @@ section _phsource/phonemes.stamp:_ **phsource/ph_thai** \
 section _dictionaries:_ **espeak-ng-data/th_dict** \
 
 and add _th:_ section with
-{ th: espeak-ng-data/th_dict espeak-ng-data/th_dict: dictsource/th_list dictsource/th_rules dictsource/th_extra }
-
+```
+th: espeak-ng-data/th_dict espeak-ng-data/th_dict: dictsource/th_list dictsource/th_rules dictsource/th_extra 
+```
 - To go into ../espeak-ng-data/lang/
-{ ./tai
-  ../th }
+- ./tai
+- ../th 
 **This is already done in the current package of espeak-ng.**
 
 - To copy into ../dictsource/
@@ -98,9 +100,10 @@ and add _th:_ section with
 { ph_thai }
 
 - To edit and append to content of ../phsource/phonemes file
-{ phonemetable th base1
-  include ph_thai }
-
+```
+phonemetable th base1
+include ph_thai 
+```
 These files and changes must be applied to espeak-ng source before the usual build process (eg. ./autogen.sh, ./configure, make, make test, ...). If there are any errors in the build process, do a 'make clean', amend the errors and restart the build process again.
 
 *Note.* If there are further change to ph_thai then 'make th' may be used to recompiled ph_thai instead of 'make'. See documentation in espeak-ng.
