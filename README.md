@@ -46,15 +46,17 @@ Either 'swath' and (libthai) 'test-thwbrk' can be used to break Thai text into s
 Both 'swath', 'libthai' (and a libthai dependency 'libdatrie') packages can be obtained from https://github.com/tlwg or https://linux.thai.net/projects/.
 
 If 'swath' is to be used to segment text into syllables, the syllable dictionary (supplied in ../utterdict) must be specified instead of its own ..data/swathdic.tri. eg.
-{ echo "สวัสดีค่ะ" | swath -u u,u -d (path-to)/th-utterdict/thbrk.tri }
+```
+echo "สวัสดีค่ะ" | swath -u u,u -d (path-to)/th-utterdict/thbrk.tri }
 would output
-{ สวัส|ดี|ค่ะ }
-
+{ สวัส|ดี|ค่ะ
+```
 If 'thwbrk' is used, then the program test_thwbrk.c (.../libthai.../tests/) is to be modified (as supplied, see its source code) and compiled with others using the usual Linux system 'make' (./configure, make, and 'make test') to build test_thwbrk for use in breaking Thai phrases into syllables. The syllable dictionary (supplied in ../th-utterdict/ ) is to be used in place of libthai/data/thbrk.tri by specifying LIBTHAI_DICTDIR eg.
+```
 { LIBTHAI_DICTDIR=(path-to)/th-utterdict (path-to-modified)/tests/test_thwbrk -i "สวัสดีครับ" }
 would produce
 { สวัส|ดี|ครับ }
-
+```
 *Note.* libthai needs just 'make' to compile but not 'make install' (to install for systemwide use. 'espeak-th' bash script runs it from the libthai source directory).
 
 ### Espeak-ng
@@ -124,14 +126,16 @@ The file g2p-th2ipa.dat contains a grapheme-to-phoneme translation table. Differ
 The bash script 'espeak-th' is provided for testing both g2p and synthesizer steps.
 (Note. espeak-th accepts options: -i "thai text" and -f file-containing-thai-text)
 eg.
-{ $ espeak-th -i"สวัสดีค่ะ" }
+```
+$ espeak-th -i"สวัสดีค่ะ" 
 would respond with a voice and details of its analysis
-{ # สวัส|ดี|ค่ะ s,aw'a1=d|d'ii0=|kh'a1=|:||
-  # done : 3 syllables from 1 lines in -
-}
+# สวัส|ดี|ค่ะ s,aw'a1=d|d'ii0=|kh'a1=|:||
+# done : 3 syllables from 1 lines in -
+```
 or
-{ $ (path-to)/speak-th -f file-containing-thai-text }
-
+```
+$ (path-to)/speak-th -f file-containing-thai-text 
+```
 Several .tmp files are created and left for debugging: espeak-th-inf.tmp, espeak-th-auf.au, espeak-th-brk.tmp, and espeak-th-ipa.tmp.
 
 For other options please see the bash script.
