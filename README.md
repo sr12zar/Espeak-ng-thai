@@ -85,20 +85,24 @@ and add _th:_ section with
 th: espeak-ng-data/th_dict espeak-ng-data/th_dict: dictsource/th_list dictsource/th_rules dictsource/th_extra 
 ```
 - To go into ../espeak-ng-data/lang/
-- ./tai
-- ../th 
+1.  ./tai
+2.  ../th 
+
 **This is already done in the current package of espeak-ng.**
 
 - To copy into ../dictsource/
+```
 { - th_rules
   - th_list
   - th_extra
 }
+```
 *Note*. At present both th_list and th_extra are just empty files. The original th_rules file if exists must be replaced with the one supplied.
 
 - To copy into ../phsource/
+```
 { ph_thai }
-
+```
 - To edit and append to content of ../phsource/phonemes file
 ```
 phonemetable th base1
@@ -110,7 +114,7 @@ These files and changes must be applied to espeak-ng source before the usual bui
 
 ### Gawk
 
-The Gnu awk (gawk) script, ==g2p.awk== is written and used to pattern match and translate Thai sylables into phonemes.
+The Gnu awk (gawk) script, *g2p.awk* is written and used to pattern match and translate Thai sylables into phonemes.
 
 See https://www.gnu.org/s/gawk/manual/html_node/Quick-Installation.html for 'gawk'  installation details for your Linux distribution.
 
